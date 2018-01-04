@@ -1,9 +1,5 @@
 
 //TODO : connect to github API
-// TODO : read data
-// TODO : patse data
-// TODO : print data out
-
   
 const https = require('https');
 
@@ -17,17 +13,21 @@ const options = {
   }
 }
 
+// TODO : read data
+let request = https.request(options, (response) => {
+  // console.log('statusCode:', response.statusCode);
+  // console.log('headers:', response.headers);
 
-let req = https.request(options, (res) => {
-  console.log('statusCode:', res.statusCode);
-  console.log('headers:', res.headers);
+  response.on('data', (d) => {
+    process.stdout.write(d)
+  })
 
-  // res.on('data', (d) => {
-  //   process.stdout.write(d);
-  // });
-});
+// TODO : patse data
+// TODO : print data out
 
-req.on('error', (e) => {
-  console.error(e);
-});
-req.end();
+})
+
+request.on('error', (e) => {
+  console.error(e)
+})
+request.end()
